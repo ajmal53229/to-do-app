@@ -1,0 +1,82 @@
+body {
+
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background:
+    radial-gradient(circle at top right,#2563eb33,transparent 35%),
+    radial-gradient(circle at bottom left,#06b6d433,transparent 35%),
+    linear-gradient(135deg,#020617,#0f172a,#111827);
+  background-size: cover;
+  overflow-x: hidden;
+
+}
+
+.glass{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:28px;
+    transition:.35s ease;
+    box-shadow:0 25px 60px rgba(0,0,0,.45);
+}
+
+.glass:hover{
+    transform:translateY(-8px);
+    box-shadow:0 35px 80px rgba(37,99,235,.25);
+}
+
+.heading{
+    color:#fff;
+    font-size:2.3rem;
+    font-weight:700;
+    text-align:center;
+}
+
+.heading span{
+    color:#3b82f6;
+}
+
+input{
+    width:100%;
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    color:#fff;
+    transition:.3s;
+}
+
+input::placeholder{
+    color:#9ca3af;
+}
+
+input:focus{
+    border-color:#3b82f6 !important;
+    box-shadow:0 0 0 5px rgba(59,130,246,.18);
+    background:#1e293b;
+}
+
+.gradient-btn{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    border:none;
+    color:#fff;
+    font-weight:600;
+    transition:.3s;
+}
+
+.gradient-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(37,99,235,.45);
+}
+
+nav{
+    background:rgba(2,6,23,.75);
+    backdrop-filter:blur(18px);
+}
+
+a{
+    transition:.3s;
+}
+
+a:hover{
+    color:#3b82f6;
+}
