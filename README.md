@@ -112,17 +112,6 @@ npm run dev
 
 ---
 
-## 📸 Screenshots
-
-You can add screenshots here.
-
-- Signup Page
-- Login Page
-- OTP Verification
-- Todo Dashboard
-
----
-
 ## 📌 API Endpoints
 
 | Method | Endpoint | Description |
