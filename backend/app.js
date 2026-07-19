@@ -13,7 +13,7 @@ const connection = require('./connection/connection');
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "to-do-22lytwyjl-ajmal53229s-projects.vercel.app",
     credentials: true
 }));
 app.use(express.json())
