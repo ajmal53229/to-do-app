@@ -13,7 +13,7 @@ const connection = require('./connection/connection');
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "to-do-22lytwyjl-ajmal53229s-projects.vercel.app",
+    origin: "https://to-do-22lytwyjl-ajmal53229s-projects.vercel.app",
     credentials: true
 }));
 app.use(express.json())
