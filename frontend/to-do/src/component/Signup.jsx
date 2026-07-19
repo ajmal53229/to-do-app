@@ -20,7 +20,7 @@ const Signup = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const res = await axios.post("http://to-do-app-production-a39a.up.railway.app/user" , data)
+    const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/user" , data)
     if(res.data === 'user saved'){
       navigate(`/otp?email=${data.email}`);
     }

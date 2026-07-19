@@ -21,7 +21,7 @@ const Otp = ({auth_check ,  fetchTasks}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-       const res = await axios.post("http://to-do-app-production-a39a.up.railway.app/varifyOTP", OTPdata)
+       const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/varifyOTP", OTPdata)
     if(res.data === 'otp matched'){
       const isAuth = await auth_check()
       if(isAuth){

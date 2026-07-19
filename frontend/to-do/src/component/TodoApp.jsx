@@ -10,7 +10,7 @@ export default function TodoApp({tasks , fetchTasks}) {
 
   const sendata = async (task)=>{
     try {
-      const res = await axios.post("http://to-do-app-production-a39a.up.railway.app/task" , task,{
+      const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/task" , task,{
         withCredentials: true
       })
       }
@@ -30,7 +30,7 @@ export default function TodoApp({tasks , fetchTasks}) {
   const toggleTask = async (_id) => {
 
     try {
-      const res = await axios.post("http://to-do-app-production-a39a.up.railway.app/update" , {_id},{
+      const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/update" , {_id},{
         withCredentials: true
       })
       await fetchTasks()
@@ -45,7 +45,7 @@ export default function TodoApp({tasks , fetchTasks}) {
   const deleteTask = async (_id) => {
 
     try {
-      const res = await axios.post("to-do-app-production-a39a.up.railway.app/delete" , {_id},{
+      const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/delete" , {_id},{
         withCredentials: true
       })
       await fetchTasks()
