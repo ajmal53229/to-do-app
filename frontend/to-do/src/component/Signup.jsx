@@ -20,7 +20,7 @@ const Signup = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:7000/user" , data)
+    const res = await axios.post("to-do-22lytwyjl-ajmal53229s-projects.vercel.app/user" , data)
     if(res.data === 'user saved'){
       navigate(`/otp?email=${data.email}`);
     }

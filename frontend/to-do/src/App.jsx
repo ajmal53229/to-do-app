@@ -17,7 +17,7 @@ const App = () => {
 
   const auth_check = async () =>{
       try {
-      const res =await axios.get("http://localhost:7000/Check_auth", {
+      const res =await axios.get("to-do-22lytwyjl-ajmal53229s-projects.vercel.app/Check_auth", {
             withCredentials: true,
         })
         console.log("LOGIN RESPONSE:", res.data)
@@ -36,7 +36,7 @@ const App = () => {
 
     const fetchTasks =async ()=>{
       try {
-  const res = await axios.get("http://localhost:7000/Data",
+  const res = await axios.get("to-do-22lytwyjl-ajmal53229s-projects.vercel.app/Data",
     {
     withCredentials: true
   }

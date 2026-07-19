@@ -21,7 +21,7 @@ const Otp = ({auth_check ,  fetchTasks}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-       const res = await axios.post("http://localhost:7000/varifyOTP", OTPdata)
+       const res = await axios.post("to-do-22lytwyjl-ajmal53229s-projects.vercel.app/varifyOTP", OTPdata)
     if(res.data === 'otp matched'){
       const isAuth = await auth_check()
       if(isAuth){
