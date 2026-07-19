@@ -5,7 +5,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const cors = require('cors');
 const addTask = require('./controler');
-const Router = require('./routers/Router');
+const Router = require('./routers/router');
 const cookieParser = require("cookie-parser");
 const connection = require('./connection/connection');
 
