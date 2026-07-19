@@ -23,6 +23,7 @@ const Login = ({auth_check,fetchTasks}) => {
     const res = await axios.post("http://localhost:7000/login" , data , {
       withCredentials: true
     })
+    console.log('login token', res.data)
       const isAuth =await auth_check()
 if(isAuth){
   await fetchTasks()

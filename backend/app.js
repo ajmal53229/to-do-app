@@ -4,10 +4,11 @@ const app = express()
 const path = require('path')
 const mongoose = require('mongoose')
 const cors = require('cors');
-const connection = require('./connection/connection');
 const addTask = require('./controler');
 const Router = require('./routers/Router');
 const cookieParser = require("cookie-parser");
+const connection = require('./connection/connection');
+
 
 app.use(cookieParser());
 

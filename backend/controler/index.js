@@ -81,6 +81,7 @@ const verifyOtp  = async(req,res)=>{
 // Login
 
 const login = async(req,res)=>{
+    console.log('login called')
 const {email , password} = req.body
 try {
      const userfound =await user.findOne({email})
@@ -105,6 +106,7 @@ try {
                 expiresIn: '1d'
             }
         )
+        console.log("TOKEN CREATED:", token);
         res.cookie('token', token, {
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000, // 1 day
@@ -119,7 +121,7 @@ catch (error) {
 
 // Check auth
 const Check_auth = async(req,res)=>{
-    // console.log(req.user)
+    console.log(req.user)
     res.json({
         success: true,
         user: req.user
@@ -142,7 +144,6 @@ const addTask = async(req,res)=>{
         res.json(error.message)
     }
 }
-
 // delete task
 
 

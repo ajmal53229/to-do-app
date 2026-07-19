@@ -20,6 +20,7 @@ const App = () => {
       const res =await axios.get("http://localhost:7000/Check_auth", {
             withCredentials: true,
         })
+        console.log("LOGIN RESPONSE:", res.data)
           setCheck(res.data.success)
           return res.data.success
     } 
