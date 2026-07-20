@@ -22,6 +22,10 @@ const transporter = nodemailer.createTransport({
 
 const Signup = async(req,res)=>{
     const {name , email , password} = req.body
+    const userExist =await user.find(email)
+    if (userExist){
+        return res.send('user already exist')
+    }
     const hashedPassword = await bcrypt.hash(password , 10)
     let isvarified = false
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
