@@ -20,12 +20,17 @@ const Signup = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/user" , data)
+    try {
+      const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/user" , data)
     if(res.data === 'user saved'){
       navigate(`/otp?email=${data.email}`);
     }
     else{
       console.log(res.data)
+    }
+    } 
+    catch (error) {
+      console.log("Signup Error:", error.response?.data || error.message);
     }
   };
 
