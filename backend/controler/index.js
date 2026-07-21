@@ -21,6 +21,7 @@ const transporter = nodemailer.createTransport({
 //sign up
 
 const Signup = async(req,res)=>{
+    try {
     const {name , email , password} = req.body
     const userExist =await user.findOne({email})
     if (userExist){
@@ -35,7 +36,7 @@ const Signup = async(req,res)=>{
         subject : 'OTP Varification',
         text: `your OTP is ${otp}`
     })
-    try {
+    
         const NewUser =await new user({
             name , email , otp , isvarified , password : hashedPassword
         })
