@@ -20,6 +20,7 @@ const transporter = nodemailer.createTransport({
 
 // otp genrate
     const generateOTP= async (email)=>{
+        console.log('otp genrater called')
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
     let isvarified = false
     await transporter.sendMail({
@@ -33,7 +34,6 @@ const transporter = nodemailer.createTransport({
         return false
     }
     userfound.otp = otp
-    userfound.isvarified = false
      await userfound.save()
         return true
     }
