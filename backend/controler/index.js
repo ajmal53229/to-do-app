@@ -8,8 +8,8 @@ const jwt = require('jsonwebtoken');
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
     
     auth:{
         user: process.env.EMAIL_USER,
@@ -22,20 +22,20 @@ const transporter = nodemailer.createTransport({
     const generateOTP= async (email)=>{
         console.log('otp genrater called')
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
-     console.log("before send mail");
-    await transporter.sendMail({
-        from : 'ajmalbaltistani229@gmail.com',
-        to : email,
-        subject : 'OTP Varification',
-        text: `your OTP is ${otp}`
-    })
-     console.log("after send mail");
     const userfound = await user.findOne({email})
     if(!userfound){
         return false
     }
     userfound.otp = otp
      await userfound.save()
+     console.log("before send mail");
+    await transporter.sendMail({
+        from : process.env.EMAIL_USER,
+        to : email,
+        subject : 'OTP Varification',
+        text: `your OTP is ${otp}`
+    })
+     console.log("after send mail");
         return true
     }
 
