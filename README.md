@@ -6,6 +6,7 @@ A full-stack Todo application built with the MERN Stack (MongoDB, Express.js, Re
 
 - 🔐 User Signup & Login
 - 📧 Email OTP Verification
+- 🔄 Resend OTP with 60-second countdown
 - 🔑 JWT Authentication
 - 🍪 HTTP-Only Cookie Authentication
 - ✅ Add Tasks
@@ -16,7 +17,15 @@ A full-stack Todo application built with the MERN Stack (MongoDB, Express.js, Re
 - 🌐 REST API using Express.js
 - 🗄️ MongoDB Database
 
----
+
+## 📧 OTP Verification Flow
+
+1. User signs up with name, email, and password.
+2. A 6-digit OTP is generated and sent to the user's email.
+3. The user enters the OTP to verify their email.
+4. If the OTP expires or is not received, the user can resend a new OTP.
+5. Resend OTP is available after a 60-second countdown.
+6. After successful verification, the user is authenticated using JWT and an HTTP-only cookie.
 
 ## 🛠️ Tech Stack
 
@@ -62,7 +71,7 @@ to-do-app/
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git clone https://github.com/ajmal53229/to-do-app
 ```
 
 ### 2. Install Frontend
@@ -112,16 +121,6 @@ npm run dev
 
 ---
 
-## 📸 Screenshots
-
-You can add screenshots here.
-
-- Signup Page
-- Login Page
-- OTP Verification
-- Todo Dashboard
-
----
 
 ## 📌 API Endpoints
 
@@ -129,6 +128,7 @@ You can add screenshots here.
 |---------|----------|-------------|
 | POST | /user | Register User |
 | POST | /login | Login |
+| POST | /ResendOTP | Resend OTP to User Email |
 | POST | /varifyOTP | Verify OTP |
 | GET | /Check_auth | Check Authentication |
 | GET | /Data | Get User Tasks |

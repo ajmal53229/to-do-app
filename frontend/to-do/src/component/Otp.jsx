@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect , useRef} from "react";
 
 const Otp = ({auth_check ,  fetchTasks}) => {
+  const [countdown , setCountdown]=useState(60)
   const navigate = useNavigate()
   const [searchParams] = useSearchParams();
-
+const intervalRef = useRef(null);
   const [OTPdata, setOTPdata] = useState({
     userotp: "",
     email: searchParams.get("email") || "",
@@ -17,6 +19,22 @@ const Otp = ({auth_check ,  fetchTasks}) => {
       [e.target.name]: e.target.value,
     });
   };
+
+   // Timer
+  useEffect(() => {
+    if (countdown <= 0) {
+      return;
+    }
+
+    intervalRef.current = setInterval(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [countdown]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +55,18 @@ const Otp = ({auth_check ,  fetchTasks}) => {
       console.log(error.message)
     }
   };
+  const ResendOTP = async(e)=>{
+    e.preventDefault()
+    try {
+      const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/ResendOTP", {email:OTPdata.email})
+      if(res.data === 'OTP sent'){
+        setCountdown(60)
+      }
+    }
+    catch (error) {
+      console.log(error.message)
+    }
+  }
 
   return (
     <div className="bg-zinc-950 text-white min-h-screen font-sans">
@@ -77,14 +107,19 @@ const Otp = ({auth_check ,  fetchTasks}) => {
               </button>
             </form>
 
-            <div className="text-center mt-6">
-              <Link
-                to="/signup"
+            {countdown <= 0? (<div className="text-center mt-6" id="Resend-btn">
+              <button
                 className="text-zinc-400 hover:text-white"
+                onClick={ResendOTP}
               >
-                ← Back
-              </Link>
-            </div>
+                Resend OTP
+              </button>
+            </div>):
+            <div className="text-center mt-6" id="Resend-timer">
+            <h1 className="mt-6">Resend OTP in {countdown}</h1>
+            </div>}
+
+
           </div>
         </div>
       </div>

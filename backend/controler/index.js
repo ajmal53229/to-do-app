@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const Task = require('../models/taskModel');
 const user = require('../models/userModel');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { useState } = require('react');
 
 
 const transporter = nodemailer.createTransport({
@@ -18,6 +19,28 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+
+// otp genrate
+    const generateOTP= async (email)=>{
+    const otp = Math.floor(100000 + Math.random() * 900000).toString()
+    let isvarified = false
+    await transporter.sendMail({
+        from : 'ajmalbaltistani229@gmail.com',
+        to : email,
+        subject : 'OTP Varification',
+        text: `your OTP is ${otp}`
+    })
+    const userfound = await user.findOne({email})
+    if(!userfound){
+        return false
+    }
+    userfound.otp = otp
+    userfound.isvarified = false
+     await userfound.save()
+        return true
+    }
+
+
 //sign up
 
 const Signup = async(req,res)=>{
@@ -28,25 +51,38 @@ const Signup = async(req,res)=>{
         return res.send('user already exist')
     }
     const hashedPassword = await bcrypt.hash(password , 10)
-    let isvarified = false
-    const otp = Math.floor(100000 + Math.random() * 900000).toString()
-    await transporter.sendMail({
-        from : 'ajmalbaltistani229@gmail.com',
-        to : email,
-        subject : 'OTP Varification',
-        text: `your OTP is ${otp}`
-    })
-    
         const NewUser =await new user({
-            name , email , otp , isvarified , password : hashedPassword
+            name , email , password : hashedPassword
         })
         await NewUser.save()
+        const otpSent = await generateOTP(email);
+
+    if (!otpSent) {
+      return res.send("user not found");
+    }
         res.json('user saved')
     }
     catch (error) {
         res.json(error.message)
     }
 }
+
+// Resend OTP
+const ResendOTP = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const otpSent = await generateOTP(email);
+
+    if (!otpSent) {
+      return res.send("user not found");
+    }
+
+    res.send("OTP sent");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
 
 // Varify OTP
 const verifyOtp  = async(req,res)=>{
@@ -101,6 +137,9 @@ try {
     )
     if(!match){
         return res.send('Incorrect Password')
+    }
+    if(userfound.isvarified === false){
+        return res.send('plzz Varify first')
     }
 
     const token = jwt.sign(
@@ -201,4 +240,4 @@ const getData = async(req,res)=>{
 }
 
 
-module.exports = {Signup ,Check_auth, addTask , deleted , update , getData, login , verifyOtp}
+module.exports = {Signup ,Check_auth, addTask , deleted , update , getData, login , ResendOTP , verifyOtp}

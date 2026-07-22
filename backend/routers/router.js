@@ -1,6 +1,6 @@
 const path = require('path')
 const express = require('express')
-const {addTask, deleted, getData, update, Signup ,Check_auth, login, verifyOtp} = require('../controler')
+const {addTask, deleted, getData, update, Signup ,Check_auth, login, verifyOtp, ResendOTP,} = require('../controler')
 const auth = require('../middleware/auth');
 
 const Router = express.Router()
@@ -10,6 +10,9 @@ Router.post('/user' ,Signup)
 
 // user signup
 Router.post('/login' ,login)
+
+// Resend OTP
+Router.post('/ResendOTP', ResendOTP)
 
 // Varify OTP
 Router.post('/varifyOTP' , verifyOtp)
