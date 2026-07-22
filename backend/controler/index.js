@@ -53,8 +53,9 @@ const Signup = async(req,res)=>{
             name , email , password : hashedPassword
         })
         await NewUser.save()
+        console.log('user saved')
         const otpSent = await generateOTP(email);
-
+        console.log('otp result:', otpSent)
     if (!otpSent) {
       return res.send("user not found");
     }
