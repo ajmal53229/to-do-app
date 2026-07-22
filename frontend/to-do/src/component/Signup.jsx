@@ -22,6 +22,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const res = await axios.post("https://to-do-app-production-a39a.up.railway.app/user" , data)
+      console.log(res.data)
     if(res.data === 'user saved'){
       navigate(`/otp?email=${data.email}`);
     }

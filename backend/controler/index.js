@@ -84,7 +84,6 @@ const ResendOTP = async (req, res) => {
 
 // Varify OTP
 const verifyOtp  = async(req,res)=>{
-    console.log(req.body)
     const {email ,userotp} = req.body
     try {
         const userfound =await user.findOne({email})
@@ -122,7 +121,6 @@ const verifyOtp  = async(req,res)=>{
 // Login
 
 const login = async(req,res)=>{
-    console.log('login called')
 const {email , password} = req.body
 try {
      const userfound =await user.findOne({email})
