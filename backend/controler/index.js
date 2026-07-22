@@ -58,10 +58,10 @@ const Signup = async(req,res)=>{
     if (!otpSent) {
       return res.send("user not found");
     }
-        res.json('user saved')
+        return res.send('user saved')
     }
     catch (error) {
-        res.json(error.message)
+        return res.send(error.message)
     }
 }
 
