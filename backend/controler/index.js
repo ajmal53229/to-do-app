@@ -22,13 +22,14 @@ const transporter = nodemailer.createTransport({
     const generateOTP= async (email)=>{
         console.log('otp genrater called')
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
-    let isvarified = false
+     console.log("before send mail");
     await transporter.sendMail({
         from : 'ajmalbaltistani229@gmail.com',
         to : email,
         subject : 'OTP Varification',
         text: `your OTP is ${otp}`
     })
+     console.log("after send mail");
     const userfound = await user.findOne({email})
     if(!userfound){
         return false
