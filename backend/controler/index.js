@@ -5,8 +5,6 @@ const nodemailer = require('nodemailer')
 const Task = require('../models/taskModel');
 const user = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-const { useState } = require('react');
-
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
