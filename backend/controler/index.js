@@ -1,24 +1,14 @@
 require('dotenv').config();
 const path = require('path');
 const bcrypt = require('bcrypt')
-const nodemailer = require('nodemailer')
 const Task = require('../models/taskModel');
 const user = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const dns = require("dns");
 
-dns.setDefaultResultOrder("ipv4first");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-
-    auth:{
-        user: process.env.EMAIL_USER,
-        pass : process.env.EMAIL_PASS
-    }
-})
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 // otp genrate
@@ -32,12 +22,18 @@ const transporter = nodemailer.createTransport({
     userfound.otp = otp
      await userfound.save()
      console.log("before send mail");
-    await transporter.sendMail({
-        from : process.env.EMAIL_USER,
-        to : email,
-        subject : 'OTP Varification',
-        text: `your OTP is ${otp}`
-    })
+
+    await resend.emails.send({
+  from: "onboarding@resend.dev",
+  to: email,
+  subject: "Your OTP",
+  html: `
+    <h2>Todo App OTP Verification</h2>
+    <p>Your OTP is:</p>
+    <h1>${otp}</h1>
+  `
+});
+
      console.log("after send mail");
         return true
     }
